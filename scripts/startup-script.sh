@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo '=========== VM SUCCESSFULLY CREATED ============'
+
 #https://cloud.google.com/compute/docs/metadata/predefined-metadata-keys
 MLFLOW_HOST=$(curl --silent http://metadata.google.internal/computeMetadata/v1/instance/attributes/mlflow_host -H "Metadata-Flavor: Google")
 MLFLOW_PORT=$(curl --silent http://metadata.google.internal/computeMetadata/v1/instance/attributes/mlflow_port -H "Metadata-Flavor: Google")
@@ -11,7 +13,7 @@ POSTGRES_DATABASE_NAME=$(curl --silent http://metadata.google.internal/computeMe
 POSTGRES_PASSWORD_SECRET_NAME=$(curl --silent http://metadata.google.internal/computeMetadata/v1/instance/attributes/postgres_password_secret_name -H "Metadata-Flavor: Google")
 GCP_DOCKER_REGISTERY_URL=$(curl --silent http://metadata.google.internal/computeMetadata/v1/instance/attributes/gcp_docker_registery_url -H "Metadata-Flavor: Google")
 
-#Install docker
+#In order to install docker from the below url we have  to enable "Cloud NAT" service in GCP
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 

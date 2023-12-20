@@ -21,9 +21,11 @@ lock-dependencies: BUILD_POETRY_LOCK = /root/poetry.lock.build
 guard-%:
 	@#$(or ${$*}, $(error $* is not set))
 
+#Remove "bash" if running on linux
 deploy: push
-	./scripts/create-server.sh
+	bash ./scripts/create-server.sh
 
+#Once the VM instance is up and running we can use this command to create tunnel b/w gcp and our local machine to view the server
 mlflow-tunnel:
 	gcloud compute ssh "$${VM_NAME}" --zone "$${ZONE}" --tunnel-through-iap -- -N -L "$${MLFLOW_PORT}:localhost:$${MLFLOW_PORT}"
 

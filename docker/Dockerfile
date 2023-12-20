@@ -24,7 +24,7 @@ RUN \
 	&& tar -C /usr/local/gcloud -xf /tmp/google-cloud-sdk.tar.gz \
 	&& /usr/local/gcloud/google-cloud-sdk/install.sh --usage-reporting false --command-completion true --bash-completion true --path-update true --quiet
 
-RUN echo '[GoogleCompute]\nservice_account = default' > /etc/boto.cfg
+RUN echo '[GoogleCompute]\nservice_account=default' > /etc/boto.cfg
 
 COPY ./docker/scripts/*.sh /
 RUN chmod +x /*.sh
