@@ -9,10 +9,10 @@ export
 SHELL := /usr/bin/env bash
 HOSTNAME := $(shell hostname)
 
-ifeq(, $(shell which docker-compose))
-	DOCKER_COMPOSE_COMMAND = docker compose
+ifeq (, $(shell which docker-compose))
+		DOCKER_COMPOSE_COMMAND = docker compose
 else
-	DOCKER_COMPOSE_COMMAND = docker-compose
+		DOCKER_COMPOSE_COMMAND = docker-compose
 endif
 
 lock-dependencies: BUILD_POETRY_LOCK = /root/poetry.lock.build
@@ -35,7 +35,7 @@ _build-for-dependencies:
 	${DOCKER_COMPOSE_COMMAND} build
 
 push: guard-IMAGE_TAG build
-	@gcloud auth configure-docker --quiet
+	@gcloud auth configure-docker asia.gcr.io --quiet
 	@docker tag "${DOCKER_IMAGE_NAME}:latest" "$${GCP_DOCKER_REGISTERY_URL}:$${IMAGE_TAG}"
 	@docker push "$${GCP_DOCKER_REGISTERY_URL}:$${IMAGE_TAG}"
 
